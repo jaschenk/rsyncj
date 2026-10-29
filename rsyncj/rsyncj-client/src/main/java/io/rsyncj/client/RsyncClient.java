@@ -229,7 +229,21 @@ public final class RsyncClient implements AutoCloseable {
             context.init(null, new TrustManager[]{trustManager}, new SecureRandom());
 
             SSLSocket socket = (SSLSocket) context.getSocketFactory().createSocket();
-            socket.connect(new InetSocketAddress(config.host(), config.port()), config.connectTimeoutMs());
+            try {
+                socket.connect(new InetSocketAddress(config.host(), config.port()), config.connectTimeoutMs());
+            } catch (java.net.ConnectException e) {
+                socket.close();
+                throw new IOException("Cannot connect to " + config.host() + ":" + config.port() + " ("
+                        + e.getMessage() + "). Is the server running and is the port correct? "
+                        + "Use user@host:PORT:/path, user@host:PORT/path or --port.", e);
+            } catch (java.net.SocketTimeoutException e) {
+                socket.close();
+                throw new IOException("Timed out connecting to " + config.host() + ":" + config.port()
+                        + " - check firewall rules and the port number", e);
+            } catch (java.net.UnknownHostException e) {
+                socket.close();
+                throw new IOException("Cannot resolve host '" + config.host() + "'", e);
+            }
             socket.setSoTimeout(config.readTimeoutMs());
             socket.setTcpNoDelay(true);
             SSLParameters parameters = socket.getSSLParameters();

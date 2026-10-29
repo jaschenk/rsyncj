@@ -66,6 +66,17 @@ final class SessionHandler implements Runnable {
         this.root = config.root();
     }
 
+    private String peer() {
+        java.net.SocketAddress address = socket.getRemoteSocketAddress();
+        return address == null ? "unknown" : address.toString();
+    }
+
+    private String label() {
+        return sessionId != null
+                ? "Session " + sessionId + " (user=" + user + ", " + peer() + ")"
+                : "Unauthenticated connection from " + peer();
+    }
+
     @Override
     public void run() {
         stats.sessionOpened();
@@ -81,15 +92,24 @@ final class SessionHandler implements Runnable {
         } catch (ProtocolException e) {
             stats.error();
             sendErrorOnce("protocol_error", e.getMessage());
-            LOG.log(System.Logger.Level.WARNING, "Session " + sessionId + " protocol error: " + e.getMessage());
+            LOG.log(System.Logger.Level.WARNING, label() + " protocol error: " + e.getMessage());
         } catch (EOFException e) {
             LOG.log(System.Logger.Level.DEBUG, "Client disconnected: " + user);
+        } catch (javax.net.ssl.SSLException e) {
+            stats.error();
+            String msg = String.valueOf(e.getMessage());
+            if (msg.contains("Unsupported or unrecognized SSL message") || msg.contains("plaintext")) {
+                LOG.log(System.Logger.Level.WARNING, "Rejected non-TLS connection from " + peer()
+                        + " (plain HTTP/TCP sent to the TLS sync port - check client port and scheme)");
+            } else {
+                LOG.log(System.Logger.Level.WARNING, "TLS handshake failed with " + peer() + ": " + msg);
+            }
         } catch (IOException e) {
             stats.error();
-            LOG.log(System.Logger.Level.WARNING, "Session " + sessionId + " I/O error: " + e.getMessage());
+            LOG.log(System.Logger.Level.WARNING, label() + " I/O error: " + e.getMessage());
         } catch (Exception e) {
             stats.error();
-            LOG.log(System.Logger.Level.ERROR, "Session " + sessionId + " failed", e);
+            LOG.log(System.Logger.Level.ERROR, label() + " failed", e);
         } finally {
             try {
                 socket.close();
@@ -165,7 +185,7 @@ final class SessionHandler implements Runnable {
                 .put("serverTime", Instant.now().toString())
                 .put("product", Version.PRODUCT)
                 .put("protocol", Version.PROTOCOL));
-        LOG.log(System.Logger.Level.INFO, "Authenticated user=" + user + " session=" + sessionId);
+        LOG.log(System.Logger.Level.INFO, "Authenticated user=" + user + " session=" + sessionId + " from " + peer());
     }
 
     // --------------------------------------------------------------- command

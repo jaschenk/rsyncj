@@ -32,11 +32,16 @@ public final class Main {
             rsyncj client
 
             Usage:
-              rsyncj sync <source> <user@host[:port]:remotePath> [options]
+              rsyncj sync <source> <remote> [options]
               rsyncj stats <user@host[:port]> [options]
               rsyncj fingerprint <host[:port]>
 
+            Remote forms (default port 8443):
+              user@host:/path   user@host:9443:/path   user@host:9443/path
+              rsyncj://user@host:9443/path
+
             Sync options:
+              -p, --port <n>        Server port (overrides the port in <remote>)
               --delete              Delete remote files that no longer exist locally
               --dry-run             Compute the delta but do not write anything
               --verbose             Print one line per file
@@ -96,7 +101,11 @@ public final class Main {
 
     private static int sync(Options options) throws Exception {
         String sourceArg = options.positional(0, "sync requires a source path");
-        RemoteTarget target = RemoteTarget.parse(options.positional(1, "sync requires user@host:path"));
+        RemoteTarget target = options.apply(RemoteTarget.parse(options.positional(1, "sync requires user@host:path")));
+        if (options.verbose) {
+            System.err.println("connecting to " + target.host() + ":" + target.port()
+                    + " as " + target.user() + ", remote path " + target.path());
+        }
 
         ClientConfig config = options.toConfig(target);
         Path source = Path.of(sourceArg);
@@ -111,7 +120,7 @@ public final class Main {
     }
 
     private static int stats(Options options) throws Exception {
-        RemoteTarget target = RemoteTarget.parseHost(options.positional(0, "stats requires user@host"));
+        RemoteTarget target = options.apply(RemoteTarget.parseHost(options.positional(0, "stats requires user@host")));
         if (options.http) {
             String token = options.token != null ? options.token : System.getenv("RSYNCJ_STATS_TOKEN");
             if (token == null || token.isBlank()) {
@@ -130,7 +139,7 @@ public final class Main {
     }
 
     private static int fingerprint(Options options) throws Exception {
-        RemoteTarget target = RemoteTarget.parseHost(options.positional(0, "fingerprint requires host[:port]"));
+        RemoteTarget target = options.apply(RemoteTarget.parseHost(options.positional(0, "fingerprint requires host[:port]")));
         X509Certificate[] captured = new X509Certificate[1];
         TrustManager capture = new X509TrustManager() {
             @Override
@@ -220,34 +229,86 @@ public final class Main {
 
     record RemoteTarget(String user, String host, int port, String path) {
 
-        private static final Pattern PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?:(.*)$");
-        private static final Pattern HOST_PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?$");
+        static final int DEFAULT_PORT = 8443;
 
+        /** rsyncj://[user@]host[:port]/path */
+        private static final Pattern URL_PATTERN =
+                Pattern.compile("^rsyncj://(?:([^@/]+)@)?([^:/@]+)(?::(\\d+))?(/.*)?$");
+        /** [user@]host:port:path or [user@]host:port/path (port present). */
+        private static final Pattern WITH_PORT =
+                Pattern.compile("^(?:([^@/]+)@)?([^:/@]+):(\\d+)(?::(.*)|(/.*))$");
+        /** [user@]host:path (no port). */
+        private static final Pattern NO_PORT =
+                Pattern.compile("^(?:([^@/]+)@)?([^:/@]+):(.*)$");
+        private static final Pattern HOST_PATTERN =
+                Pattern.compile("^(?:rsyncj://)?(?:([^@/]+)@)?([^:/@]+)(?::(\\d+))?/?$");
+
+        /**
+         * Parses a sync target. Accepted forms:
+         * <pre>
+         *   user@host:/path            (default port 8443)
+         *   user@host:9443:/path
+         *   user@host:9443/path
+         *   rsyncj://user@host:9443/path
+         * </pre>
+         */
         static RemoteTarget parse(String value) {
-            Matcher matcher = PATTERN.matcher(value);
-            if (!matcher.matches()) {
-                throw new IllegalArgumentException("Invalid remote '" + value
-                        + "', expected [user@]host[:port]:path");
+            Matcher m = URL_PATTERN.matcher(value);
+            if (m.matches()) {
+                String path = m.group(4) == null ? "" : m.group(4);
+                return build(value, m.group(1), m.group(2), m.group(3), path);
             }
-            String user = matcher.group(1) != null ? matcher.group(1) : System.getProperty("user.name");
-            String host = matcher.group(2);
-            int port = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 8443;
-            String path = matcher.group(4);
-            if (path.isEmpty()) {
-                throw new IllegalArgumentException("Remote path is empty");
+            m = WITH_PORT.matcher(value);
+            if (m.matches()) {
+                String path = m.group(4) != null ? m.group(4) : m.group(5);
+                return build(value, m.group(1), m.group(2), m.group(3), path);
             }
-            return new RemoteTarget(user, host, port, path);
+            m = NO_PORT.matcher(value);
+            if (m.matches()) {
+                String path = m.group(3);
+                if (path.matches("\\d+")) {
+                    throw new IllegalArgumentException("Ambiguous remote '" + value + "': '" + path
+                            + "' looks like a port but no remote path was given. Use "
+                            + m.group(2) + ":" + path + ":/path or " + m.group(2) + ":" + path + "/path");
+                }
+                return build(value, m.group(1), m.group(2), null, path);
+            }
+            throw new IllegalArgumentException("Invalid remote '" + value
+                    + "', expected [user@]host[:port]:path, [user@]host:port/path or rsyncj://[user@]host[:port]/path");
         }
 
         static RemoteTarget parseHost(String value) {
-            Matcher matcher = HOST_PATTERN.matcher(value);
-            if (!matcher.matches()) {
+            Matcher m = HOST_PATTERN.matcher(value);
+            if (!m.matches()) {
                 throw new IllegalArgumentException("Invalid remote '" + value + "', expected [user@]host[:port]");
             }
-            String user = matcher.group(1) != null ? matcher.group(1) : System.getProperty("user.name");
-            String host = matcher.group(2);
-            int port = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 8443;
-            return new RemoteTarget(user, host, port, "");
+            return new RemoteTarget(user(m.group(1)), m.group(2), port(value, m.group(3)), "");
+        }
+
+        RemoteTarget withPort(int newPort) {
+            return new RemoteTarget(user, host, newPort, path);
+        }
+
+        private static RemoteTarget build(String value, String user, String host, String port, String path) {
+            if (path == null || path.isEmpty()) {
+                throw new IllegalArgumentException("Remote path is empty in '" + value + "'");
+            }
+            return new RemoteTarget(user(user), host, port(value, port), path);
+        }
+
+        private static String user(String user) {
+            return user != null ? user : System.getProperty("user.name");
+        }
+
+        private static int port(String value, String port) {
+            if (port == null) {
+                return DEFAULT_PORT;
+            }
+            int p = Integer.parseInt(port);
+            if (p < 1 || p > 65535) {
+                throw new IllegalArgumentException("Invalid port " + p + " in '" + value + "'");
+            }
+            return p;
         }
     }
 
@@ -263,6 +324,7 @@ public final class Main {
         private boolean acceptNew = true;
         private Path knownHosts = ClientConfig.defaultKnownHosts();
         private int statsPort = 8444;
+        private Integer port;
 
         static Options parse(String[] args, int start) {
             Options options = new Options();
@@ -280,6 +342,7 @@ public final class Main {
                     case "--token" -> options.token = requireValue(args, ++i, arg);
                     case "--fingerprint" -> options.fingerprint = requireValue(args, ++i, arg);
                     case "--known-hosts" -> options.knownHosts = Path.of(requireValue(args, ++i, arg));
+                    case "--port", "-p" -> options.port = Integer.parseInt(requireValue(args, ++i, arg));
                     case "--stats-port" -> options.statsPort = Integer.parseInt(requireValue(args, ++i, arg));
                     case "-h", "--help" -> {
                         System.out.println(USAGE);
@@ -294,6 +357,10 @@ public final class Main {
                 }
             }
             return options;
+        }
+
+        RemoteTarget apply(RemoteTarget target) {
+            return port != null ? target.withPort(port) : target;
         }
 
         ClientConfig toConfig(RemoteTarget target) {

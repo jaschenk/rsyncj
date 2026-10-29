@@ -138,6 +138,30 @@ into this directory":
 rsyncj sync ./a.txt alice@server:8443:/inbox/     # -> <root>/inbox/a.txt
 ```
 
+### Remote target formats
+
+The default port is **8443**. If the server listens anywhere else, put the port in the target or pass `--port`:
+
+| Form | Example |
+|---|---|
+| `user@host:/path` | `alice@srv:/backup` (port 8443) |
+| `user@host:PORT:/path` | `alice@srv:9443:/backup` |
+| `user@host:PORT/path` | `alice@srv:9443/backup` |
+| `rsyncj://user@host:PORT/path` | `rsyncj://alice@srv:9443/backup` |
+| `--port N` / `-p N` | `alice@srv:/backup --port 9443` |
+
+If `host:NNNN` has no path after the number, it is rejected as ambiguous instead of being read as a path.
+In `--verbose` mode the client prints the host, port, user and path it resolved before connecting.
+
+### Troubleshooting
+
+| Symptom | Cause / fix |
+|---|---|
+| Client: `Cannot connect to host:8443 (Connection refused)` | Wrong port. Check the `listening` line in the server banner and give that port in the target or with `--port`. |
+| Server: `Rejected non-TLS connection ...` (older builds: `Unsupported or unrecognized SSL message`) | Something sent plain text to the TLS sync port, e.g. a browser or `curl http://`, a load-balancer health check, or a port scanner. It is harmless, and the client is not involved. Use `https://` for the stats port. |
+| `HOST KEY MISMATCH` | The server key changed. Check it with `rsyncj-server fingerprint`, then remove the old line from `~/.rsyncj/known_hosts`. |
+| Need a stack trace | Set `RSYNCJ_DEBUG=1`. |
+
 ## Command line reference
 
 ### Server
@@ -160,7 +184,7 @@ rsyncj-server fingerprint [options]
 ### Client
 
 ```
-rsyncj sync <source> <user@host[:port]:remotePath> [options]
+rsyncj sync <source> <remote> [options]
 rsyncj stats <user@host[:port]> [options]
 rsyncj fingerprint <host[:port]>
 
