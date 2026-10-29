@@ -5,8 +5,8 @@ io/rsyncj/server/CertManager.class
 io/rsyncj/server/SessionHandler.class
 io/rsyncj/server/StatsHttpServer.class
 io/rsyncj/server/Main.class
-io/rsyncj/server/StatsRegistry$FileStat.class
 io/rsyncj/server/IncomingFile.class
+io/rsyncj/server/StatsRegistry$FileStat.class
 io/rsyncj/server/SessionHandler$1.class
 io/rsyncj/server/UserStore.class
 io/rsyncj/server/StatsRegistry.class

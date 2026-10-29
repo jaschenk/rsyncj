@@ -1,6 +1,6 @@
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/ClientConfig.java
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/Main.java
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/RsyncClient.java
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/SyncRequest.java
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/SyncResult.java
-/workspace/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/TofuTrustManager.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/ClientConfig.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/Main.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/RsyncClient.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/SyncRequest.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/SyncResult.java
+/home/jaschenk/code/PRODUCTS/rsyncj/rsyncj/rsyncj-client/src/main/java/io/rsyncj/client/TofuTrustManager.java
