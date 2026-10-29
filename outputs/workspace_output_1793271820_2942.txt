@@ -1,0 +1,11 @@
+  backup/a.txt                                           12 B  sent      12 B  reused       0 B  updated
+  backup/big.bin                                      1.9 MiB  sent   1.1 KiB  reused   1.9 MiB  updated
+  backup/empty.txt                                        0 B  sent       0 B  reused       0 B  updated
+  backup/sub/b.txt                                        7 B  sent       7 B  reused       0 B  updated
+  backup/sub/deep/c.txt                                   5 B  sent       5 B  reused       0 B  updated
+Synced 5 file(s) (0 unchanged) in 253 ms
+  data sent : 1.1 KiB
+  reused    : 1.9 MiB
+  efficiency: 99.9%
+EXIT=0
+IDENTICAL

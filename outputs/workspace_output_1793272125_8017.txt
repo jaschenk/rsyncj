@@ -1,0 +1,6 @@
+-rw-r--r-- 1 root root 2.3M Oct 29 11:06 /workspace/rsyncj/rsyncj-client/target/original-rsyncj-client.jar
+-rw-r--r-- 1 root root 2.3M Oct 29 11:06 /workspace/rsyncj/rsyncj-client/target/rsyncj-client.jar
+-rw-r--r-- 1 root root  48K Oct 29 11:06 /workspace/rsyncj/rsyncj-server/target/original-rsyncj-server.jar
+-rw-r--r-- 1 root root  12M Oct 29 11:06 /workspace/rsyncj/rsyncj-server/target/rsyncj-server.jar
+---
+29

@@ -1,0 +1,10 @@
+rsyncj/1.0.0 server
+  root          : /tmp/e2e/data
+  listening     : 0.0.0.0:9443 (TLS)
+  stats api     : https://0.0.0.0:9444/api/stats
+  stats token   : OAHkBmaMp653-vO7lk2L0AYufXGKifqwRHwU1q-weDE
+  users         : [alice]
+  fingerprint   : 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff
+
+Oct 29, 2026 11:03:03 AM io.rsyncj.server.SessionHandler authenticate
+INFO: Authenticated user=alice session=lfYyXN3RQczh

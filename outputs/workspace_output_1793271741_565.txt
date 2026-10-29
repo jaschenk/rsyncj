@@ -1,0 +1,32 @@
+org.opentest4j.AssertionFailedError: array contents differ at index [4095], expected: <-110> but was: <118>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:209)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:63)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:59)
+	at org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1229)
+	at io.rsyncj.common.delta.DeltaEncoderTest.deltaRoundTripReusesUnchangedBlocks(DeltaEncoderTest.java:78)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+[ERROR] Failures: 
+[ERROR]   DeltaEncoderTest.deltaRoundTripReusesUnchangedBlocks:78 array contents differ at index [4095], expected: <-110> but was: <118>
+[ERROR] Tests run: 9, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project rsyncj-common: There are test failures.
+[ERROR] 
+[ERROR] See /workspace/rsyncj/rsyncj-common/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :rsyncj-common
+-rw-r--r-- 1 root root 2.3M Oct 29 11:02 rsyncj-client/target/rsyncj-client.jar
+-rw-r--r-- 1 root root  12M Oct 29 11:02 rsyncj-server/target/rsyncj-server.jar

@@ -1,0 +1,5 @@
+114:        RemoteTarget target = RemoteTarget.parseHost(options.positional(0, "stats requires user@host"));
+133:        RemoteTarget target = RemoteTarget.parseHost(options.positional(0, "fingerprint requires host[:port]"));
+224:        private static final Pattern HOST_PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?$");
+242:        static RemoteTarget parseHost(String value) {
+243:            Matcher matcher = HOST_PATTERN.matcher(value);

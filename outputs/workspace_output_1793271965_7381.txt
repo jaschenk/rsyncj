@@ -1,0 +1,27 @@
+=== unchanged resync (expect 0 B sent) ===
+Synced 5 file(s) (5 unchanged) in 243 ms
+  data sent : 0 B
+  reused    : 2.0 MiB
+  efficiency: 100.0%
+=== delete test: remove sub/deep, add new file, sync --delete ===
+  backup/a.txt                                           12 B  sent       0 B  reused      12 B  unchanged
+  backup/big.bin                                      2.0 MiB  sent       0 B  reused   2.0 MiB  unchanged
+  backup/empty.txt                                        0 B  sent       0 B  reused       0 B  unchanged
+  backup/new.txt                                          4 B  sent       4 B  reused       0 B  updated
+  backup/sub/b.txt                                        7 B  sent       0 B  reused       7 B  unchanged
+Synced 5 file(s) (4 unchanged) in 217 ms
+  data sent : 4 B
+  reused    : 2.0 MiB
+  efficiency: 100.0%
+  deleted   : 2
+IDENTICAL
+=== single file sync ===
+  single/one.txt                                         20 B  sent      20 B  reused       0 B  updated
+Synced 1 file(s) (0 unchanged) in 12 ms
+  data sent : 20 B
+  reused    : 0 B
+  efficiency: 0.0%
+single file payload
+=== single file to trailing slash ===
+error: Server closed the connection
+single file payload

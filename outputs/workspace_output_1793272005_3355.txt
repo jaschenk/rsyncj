@@ -1,0 +1,20 @@
+rsyncj/1.0.0 server
+  root          : /tmp/e2e/data
+  listening     : 0.0.0.0:9443 (TLS)
+  stats api     : https://0.0.0.0:9444/api/stats
+  stats token   : OAHkBmaMp653-vO7lk2L0AYufXGKifqwRHwU1q-weDE
+  users         : [alice]
+  fingerprint   : 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff
+
+Oct 29, 2026 11:06:39 AM io.rsyncj.server.SessionHandler authenticate
+INFO: Authenticated user=alice session=Wde+wmWK6ghC
+Oct 29, 2026 11:06:40 AM io.rsyncj.server.SessionHandler authenticate
+INFO: Authenticated user=alice session=i/bAUE7ZgpHq
+Oct 29, 2026 11:06:40 AM io.rsyncj.server.SessionHandler run
+WARNING: Session i/bAUE7ZgpHq protocol error: Path traversal rejected: /../../etc/evil
+Oct 29, 2026 11:06:41 AM io.rsyncj.server.SessionHandler run
+WARNING: Session null protocol error: Authentication failed for user alice
+Oct 29, 2026 11:06:41 AM io.rsyncj.server.SessionHandler run
+WARNING: Session null I/O error: (certificate_unknown) Received fatal alert: certificate_unknown
+Oct 29, 2026 11:06:41 AM io.rsyncj.server.SessionHandler run
+WARNING: Session null protocol error: Connection closed before hello

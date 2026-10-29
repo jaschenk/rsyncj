@@ -1,0 +1,14 @@
+---dump---
+"main" #3 [3571] prio=5 os_prio=0 cpu=583.76ms elapsed=40.19s tid=0x00007f937c02a690 nid=3571 runnable  [0x00007f93807fe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.Net.accept(java.base@25.0.5/Native Method)
+	at sun.nio.ch.NioSocketImpl.accept(java.base@25.0.5/NioSocketImpl.java:751)
+	at java.net.ServerSocket.implAccept(java.base@25.0.5/ServerSocket.java:593)
+	at java.net.ServerSocket.platformImplAccept(java.base@25.0.5/ServerSocket.java:560)
+	at java.net.ServerSocket.implAccept(java.base@25.0.5/ServerSocket.java:509)
+	at sun.security.ssl.SSLServerSocketImpl.accept(java.base@25.0.5/SSLServerSocketImpl.java:271)
+	at io.rsyncj.server.RsyncServer.start(RsyncServer.java:92)
+	at io.rsyncj.server.Main.run(Main.java:63)
+	at io.rsyncj.server.Main.main(Main.java:38)
+
+"Reference Handler" #12 [3580] daemon prio=10 os_prio=0 cpu=0.44ms elapsed=40.17s tid=0x00007f937c0c3270 nid=3580 waiting on condition  [0x00007f93609c8000]

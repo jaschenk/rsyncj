@@ -1,0 +1,6 @@
+root        3564  8.5  3.1 3627896 128504 ?      Sl   11:03   0:01 java -jar /workspace/rsyncj/rsyncj-server/target/rsyncj-server.jar serve --root /tmp/e2e/data --state /tmp/e2e/state --port 9443 --stats-port 9444
+---
+---
+workspace_output_1793271824_193.txt
+workspace_output_1793271827_9189.txt
+workspace_output_1793271830_6227.txt

@@ -1,0 +1,25 @@
+=== 1. initial dir sync ===
+Synced 5 file(s) (0 unchanged) in 272 ms
+  data sent : 1.9 MiB
+  reused    : 0 B
+  efficiency: 0.0%
+EXIT=0
+IDENTICAL
+=== 2. modify big.bin (insert 100k at front + tweak middle) ===
+  backup/a.txt                                           12 B  sent       0 B  reused      12 B  unchanged
+  backup/big.bin                                      2.0 MiB  sent 102.0 KiB  reused   1.9 MiB  updated
+  backup/empty.txt                                        0 B  sent       0 B  reused       0 B  unchanged
+  backup/sub/b.txt                                        7 B  sent       0 B  reused       7 B  unchanged
+  backup/sub/deep/c.txt                                   5 B  sent       0 B  reused       5 B  unchanged
+Synced 5 file(s) (4 unchanged) in 309 ms
+  data sent : 102.0 KiB
+  reused    : 1.9 MiB
+  efficiency: 94.9%
+EXIT=0
+IDENTICAL
+=== 3. unchanged resync ===
+Synced 5 file(s) (4 unchanged) in 214 ms
+  data sent : 2.0 KiB
+  reused    : 2.0 MiB
+  efficiency: 99.9%
+EXIT=0

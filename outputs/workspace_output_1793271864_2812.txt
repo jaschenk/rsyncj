@@ -1,0 +1,1 @@
+'        private static final Pattern HOST_PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\\\d+))?$");'

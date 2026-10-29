@@ -1,0 +1,9 @@
+error: Connection refused (connect failed)
+EXIT=1
+total 1972
+drwxr-xr-x 3 root root    4096 Oct 29 11:03 .
+drwxr-xr-x 3 root root    4096 Oct 29 11:03 ..
+-rw-r--r-- 1 root root      12 Oct 29 11:02 a.txt
+-rw-r--r-- 1 root root 2000000 Oct 29 11:02 big.bin
+drwxr-xr-x 3 root root    4096 Oct 29 11:03 sub
+Only in /tmp/e2e/src: empty.txt

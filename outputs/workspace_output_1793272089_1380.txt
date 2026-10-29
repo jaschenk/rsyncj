@@ -1,0 +1,31 @@
+Using openjdk version "25.0.5" 2026-10-20 LTS
+Work directory: /tmp/rsyncj-e2e.zuKCk5
+Server started on port 18443
+
+1. initial directory sync
+Warning: permanently added '127.0.0.1:18443' (SHA-256 9db475133bd9a86f1e45977045b885c4d1d8ff12e4bf82ec817cf17d6a0a590e) to /tmp/rsyncj-e2e.zuKCk5/known_hosts
+  ok  directory contents identical
+2. delta transfer after inserting 100 KiB
+  ok  delta sync correct ( efficiency: 94.9%)
+3. unchanged re-sync sends no data
+  ok  zero-byte re-sync
+4. --delete removes extraneous remote files
+  ok  deletion mirrored the source
+5. single file sync (explicit name and trailing slash)
+  ok  single file sync
+6. dry-run does not modify the server
+  ok  dry-run left the destination untouched
+7. wrong password is rejected
+  ok  authentication failure reported
+8. path traversal is rejected
+  ok  traversal rejected
+9. changed server key is rejected
+  ok  host key mismatch detected
+10. stats over the authenticated protocol
+  ok  stats JSON is valid and populated
+11. stats over HTTPS with bearer token
+  ok  HTTPS stats endpoint authorised and protected
+12. stats survive a restart
+  ok  cumulative stats restored (8 syncs)
+
+All end-to-end tests passed.

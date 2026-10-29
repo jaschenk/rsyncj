@@ -1,0 +1,4 @@
+HOST_PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?$");
+
+        static RemoteTarget parse(Strin
+[('\\', 92), ('\\', 92)] count 2

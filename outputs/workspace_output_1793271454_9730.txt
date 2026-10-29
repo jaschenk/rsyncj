@@ -1,0 +1,5 @@
+Is a Developer. Works in Energy & Utilities industry---
+bash: line 3: java: command not found
+bash: line 3: mvn: command not found
+memory.md
+outputs

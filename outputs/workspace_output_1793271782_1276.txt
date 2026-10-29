@@ -1,0 +1,14 @@
+Warning: permanently added '127.0.0.1:9443' (SHA-256 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff) to /tmp/e2e/known_hosts
+  backup/a.txt                                           12 B  sent      12 B  reused       0 B  updated
+  backup/big.bin                                      1.9 MiB  sent   1.9 MiB  reused       0 B  updated
+  backup/empty.txt                                        0 B  sent       0 B  reused       0 B  unchanged
+  backup/sub/b.txt                                        7 B  sent       7 B  reused       0 B  updated
+  backup/sub/deep/c.txt                                   5 B  sent       5 B  reused       0 B  updated
+Synced 5 file(s) (1 unchanged) in 270 ms
+  data sent : 1.9 MiB
+  reused    : 0 B
+  efficiency: 0.0%
+EXIT=0
+--- diff ---
+Only in /tmp/e2e/src: empty.txt
+127.0.0.1:9443 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff

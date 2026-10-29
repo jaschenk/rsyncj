@@ -1,0 +1,26 @@
+9443 OPEN
+9444 OPEN
+---
+
+Oct 29, 2026 11:03:41 AM io.rsyncj.server.SessionHandler authenticate
+INFO: Authenticated user=alice session=82Mw83btr5RA
+Oct 29, 2026 11:04:00 AM io.rsyncj.server.SessionHandler run
+WARNING: Session null I/O error: Remote host terminated the handshake
+---
+total 0
+lr-x------ 1 root root 64 Oct 29 11:03 0 -> /dev/null
+l-wx------ 1 root root 64 Oct 29 11:03 1 -> /workspace/outputs/workspace_output_1793271807_2946.txt
+lrwx------ 1 root root 64 Oct 29 11:03 10 -> anon_inode:[eventpoll]
+lrwx------ 1 root root 64 Oct 29 11:03 11 -> anon_inode:[eventfd]
+lrwx------ 1 root root 64 Oct 29 11:03 14 -> anon_inode:[eventpoll]
+lrwx------ 1 root root 64 Oct 29 11:03 15 -> anon_inode:[eventpoll]
+lrwx------ 1 root root 64 Oct 29 11:03 16 -> anon_inode:[eventpoll]
+lrwx------ 1 root root 64 Oct 29 11:03 17 -> anon_inode:[eventpoll]
+l-wx------ 1 root root 64 Oct 29 11:03 2 -> /workspace/outputs/workspace_output_1793271807_2946.txt
+lr-x------ 1 root root 64 Oct 29 11:03 3 -> /opt/jdk25/lib/modules
+lr-x------ 1 root root 64 Oct 29 11:03 4 -> /workspace/rsyncj/rsyncj-server/target/rsyncj-server.jar
+lr-x------ 1 root root 64 Oct 29 11:03 5 -> /dev/random
+lr-x------ 1 root root 64 Oct 29 11:03 6 -> /dev/urandom
+lrwx------ 1 root root 64 Oct 29 11:03 7 -> socket:[13335]
+lrwx------ 1 root root 64 Oct 29 11:03 8 -> socket:[13342]
+lrwx------ 1 root root 64 Oct 29 11:03 9 -> socket:[13343]

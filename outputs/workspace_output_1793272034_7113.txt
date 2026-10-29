@@ -1,0 +1,28 @@
+=== traversal ===
+error: Server error [protocol_error]: Path traversal rejected: /../../etc/evil
+EXIT=1
+=== wrong password ===
+error: Server error [auth_failed]: Authentication failed
+EXIT=1
+=== unknown user ===
+error: Server error [auth_failed]: Authentication failed
+EXIT=1
+=== dry run ===
+  backup/a.txt                                           12 B  sent       0 B  reused      12 B  unchanged
+  backup/big.bin                                      2.0 MiB  sent       0 B  reused   2.0 MiB  unchanged
+  backup/empty.txt                                        0 B  sent       0 B  reused       0 B  unchanged
+  backup/new.txt                                         12 B  sent      12 B  reused       0 B  updated
+  backup/sub/b.txt                                        7 B  sent       0 B  reused       7 B  unchanged
+Would sync 5 file(s) (4 unchanged) in 225 ms
+  data sent : 12 B
+  reused    : 2.0 MiB
+  efficiency: 100.0%
+EXIT=0
+new
+=== real sync after dry run ===
+Synced 5 file(s) (4 unchanged) in 242 ms
+  data sent : 12 B
+  reused    : 2.0 MiB
+  efficiency: 100.0%
+changed
+IDENTICAL

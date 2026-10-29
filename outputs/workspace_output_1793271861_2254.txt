@@ -1,0 +1,31 @@
+
+    record RemoteTarget(String user, String host, int port, String path) {
+
+        private static final Pattern PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?:(.*)$");
+        private static final Pattern HOST_PATTERN = Pattern.compile("^(?:([^@]+)@)?([^:]+)(?::(\\d+))?$");
+
+        static RemoteTarget parse(String value) {
+            Matcher matcher = PATTERN.matcher(value);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Invalid remote '" + value
+                        + "', expected [user@]host[:port]:path");
+            }
+            String user = matcher.group(1) != null ? matcher.group(1) : System.getProperty("user.name");
+            String host = matcher.group(2);
+            int port = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 8443;
+            String path = matcher.group(4);
+            if (path.isEmpty()) {
+                throw new IllegalArgumentException("Remote path is empty");
+            }
+            return new RemoteTarget(user, host, port, path);
+        }
+
+        static RemoteTarget parseHost(String value) {
+            Matcher matcher = HOST_PATTERN.matcher(value);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Invalid remote '" + value + "', expected [user@]host[:port]");
+            }
+            String user = matcher.group(1) != null ? matcher.group(1) : System.getProperty("user.name");
+            String host = matcher.group(2);
+            int port = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 8443;
+            return new RemoteTarget(user, host, port, "");

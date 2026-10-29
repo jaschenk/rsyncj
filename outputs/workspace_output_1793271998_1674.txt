@@ -1,0 +1,31 @@
+=== single file trailing slash ===
+Synced 1 file(s) (1 unchanged) in 21 ms
+  data sent : 0 B
+  reused    : 20 B
+  efficiency: 100.0%
+EXIT=0
+=== traversal attack ===
+error: Server closed the connection
+EXIT=1
+=== wrong password ===
+error: Server closed the connection
+EXIT=1
+=== host key mismatch ===
+error: (certificate_unknown) HOST KEY MISMATCH for 127.0.0.1:9443
+  known  dead1a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff
+  actual 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff
+This could indicate a man-in-the-middle attack. If the server key really changed, remove the entry from /tmp/e2e/kh.bad or pass --fingerprint.
+EXIT=1
+=== fingerprint command ===
+SHA256:38:17:1A:21:23:A4:0B:FB:15:A4:E0:1F:4C:71:91:5F:7C:25:46:BC:B0:E3:49:DD:33:B7:1B:26:7D:BF:87:FF
+pin with --fingerprint 38171a2123a40bfb15a4e01f4c71915f7c2546bcb0e349dd33b71b267dbf87ff
+=== HTTP stats (curl) ===
+rsyncj/1.0.0
+7
+6
+=== HTTP stats unauthorized ===
+401
+=== health ===
+{
+  "status" : "ok"
+}

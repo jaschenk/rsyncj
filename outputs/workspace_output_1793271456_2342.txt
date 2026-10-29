@@ -1,0 +1,17 @@
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+x86_64
+/usr/bin/curl
+/usr/bin/wget
+/usr/bin/tar
+libasmtools-java - OpenJDK AsmTools
+libjax-maven-plugin - Using the xjc goal with OpenJDK 11+
+jtreg - Regression Test Harness for the OpenJDK platform
+jtreg6 - Regression Test Harness for the OpenJDK platform
+jtreg7 - Regression Test Harness for the OpenJDK platform
+openjdk-17-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-17-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-17-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-17-jdk - OpenJDK Development Kit (JDK)
+openjdk-17-jdk-headless - OpenJDK Development Kit (JDK) (headless)

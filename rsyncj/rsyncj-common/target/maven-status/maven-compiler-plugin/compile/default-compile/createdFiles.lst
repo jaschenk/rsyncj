@@ -1,0 +1,17 @@
+io/rsyncj/common/delta/DeltaEncoder$Sink.class
+io/rsyncj/common/protocol/Messages.class
+io/rsyncj/common/delta/DeltaEncoder.class
+io/rsyncj/common/protocol/FrameIO.class
+io/rsyncj/common/Version.class
+io/rsyncj/common/delta/DeltaEncoder$LiteralBuffer.class
+io/rsyncj/common/json/Json.class
+io/rsyncj/common/util/PathSafety.class
+io/rsyncj/common/protocol/ProtocolException.class
+io/rsyncj/common/util/Hex.class
+io/rsyncj/common/protocol/FrameIO$Frame.class
+io/rsyncj/common/protocol/FrameType.class
+io/rsyncj/common/protocol/FrameIO$Reader.class
+io/rsyncj/common/delta/RollingChecksum.class
+io/rsyncj/common/crypto/Scram.class
+io/rsyncj/common/delta/BlockSignature.class
+io/rsyncj/common/crypto/Scram$UserEntry.class

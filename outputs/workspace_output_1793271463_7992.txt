@@ -1,0 +1,4 @@
+-rw-r--r-- 1 root root 135M Oct 29 10:57 jdk25.tar.gz
+openjdk version "25.0.5" 2026-10-20 LTS
+OpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode, sharing)

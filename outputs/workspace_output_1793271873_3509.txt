@@ -1,0 +1,42 @@
+
+EXIT=0
+{
+  "server" : {
+    "product" : "rsyncj/1.0.0",
+    "protocol" : 1,
+    "root" : "/tmp/e2e/data",
+    "bind" : "0.0.0.0",
+    "port" : 9443,
+    "startedAt" : "2026-10-29T11:03:28.313916918Z",
+    "generatedAt" : "2026-10-29T11:04:38.990826444Z",
+    "uptimeSeconds" : 70
+  },
+  "sessions" : {
+    "total" : 6,
+    "active" : 1,
+    "authFailures" : 0
+  },
+  "syncs" : {
+    "total" : 2,
+    "filesSynced" : 9,
+    "filesSkipped" : 1,
+    "filesDeleted" : 0,
+    "bytesReceived" : 2001200,
+    "bytesReused" : 1998848,
+    "bytesSent" : 25747,
+    "deltaEfficiency" : 0.4997,
+    "errors" : 3,
+    "lastSyncAt" : "2026-10-29T11:03:41.424129680Z"
+  },
+  "storage" : {
+    "files" : 5,
+    "bytes" : 2000024
+  },
+  "files" : [ {
+    "path" : "backup/a.txt",
+    "size" : 12,
+--- jq ---
+0.4997
+5
+6
+5

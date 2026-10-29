@@ -1,0 +1,12 @@
+User 'alice' added to /tmp/e2e/state/users.json
+{
+  "version" : 1,
+  "users" : {
+    "alice" : {
+      "salt" : "t8C63ef8GID6Y/pO+77I8w==",
+      "iterations" : 210000,
+      "storedKey" : "Kacovi8FOudSUNjrTkFFnyefFRhgIu10oPKMp9hmdM4=",
+      "serverKey" : "/SJF6xc9UHFdQJTjiL15AL+tpcqUBV3ho4r2s8FHAds="
+    }
+  }
+}
